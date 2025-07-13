@@ -922,3 +922,7 @@ with tab_caudal:
             """)
     with col4:
         pass 
+
+# --- Pie de página personalizado ---
+st.markdown('---')
+st.markdown('<div style="text-align:center; font-size:16px; margin-top:20px; color:#555; font-family:Segoe UI;">Desarrollador: Patricio Sarmiento Reinoso<br>Maestría HS- UDA-2025</div>', unsafe_allow_html=True) 
