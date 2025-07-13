@@ -101,7 +101,49 @@ with tab_diam:
         Q = st.number_input("Caudal fijo (L/s)", min_value=0.01, value=10.0, step=0.1, key="Q_diam")
         P1_calc = st.number_input("Presión de entrada P1 (mca)", min_value=0.0, value=10.0, step=0.1, key="P1_diam_calc")
         D_calc_puntual = st.number_input("Diámetro de cálculo (mm)", min_value=1.0, value=100.0, step=1.0, key="D_calc_puntual")
-        K_coef = st.number_input("Coeficiente de pérdidas K", min_value=0.1, value=10.0, step=0.1, key="K_diam")
+        # --- ComboBox de valores típicos de K ---
+        valores_k = [
+            ("Compuerta Válvula - Completamente Abierto", 0.17),
+            ("Compuerta Válvula - 3/4 Abierto", 0.9),
+            ("Compuerta Válvula - 1/2 Abierto", 4.5),
+            ("Compuerta Válvula - 1/4 Abierto", 24),
+            ("Válvula de Globo - Completamente Abierto", 6),
+            ("Válvula de Globo - 1/2 Abierto", 9.5),
+            ("Globe Válvula, asiento completo - Completamente Abierto", 6),
+            ("Globe Válvula, asiento completo - 1/2 Abierto", 8.5),
+            ("Válvula Mariposa - Completamente Abierto", 0.2),
+            ("Válvula Mariposa - θ= 5°", 0.24),
+            ("Válvula Mariposa - θ= 10°", 0.52),
+            ("Válvula Mariposa - θ= 20°", 1.54),
+            ("Válvula Mariposa - θ= 40°", 10.8),
+            ("Válvula Mariposa - θ= 60°", 118),
+            ("Disco de taponamiento - Completamente Abierto", 9),
+            ("Disco de taponamiento - 3/4 Abierto", 13),
+            ("Disco de taponamiento - 1/2 Abierto", 36),
+            ("Disco de taponamiento - 1/4 Abierto", 112),
+            ("Válvula de Ángulo - Completamente Abierto", 2),
+            ("Válvula Check - Resorte", 2),
+            ("Válvula Check - Disco", 10),
+            ("Válvula Check - Bola", 70),
+            ("Válvula de pie", 15),
+            ("Medidor de Caudal - Disco", 7),
+            ("Medidor de Caudal - Pistón", 15),
+            ("Medidor de Caudal - Rotacional", 10),
+            ("Medidor de Caudal - Turbina", 6),
+            ("Personalizado", None)
+        ]
+        opciones_k = [v[0] for v in valores_k]
+        if 'valor_k_diam' not in st.session_state:
+            st.session_state['valor_k_diam'] = 10.0
+        seleccion_k = st.selectbox("Selecciona un valor típico de K o elige 'Personalizado':", opciones_k, key="combo_k_diam")
+        valor_k_seleccionado = next((v[1] for v in valores_k if v[0] == seleccion_k), None)
+        if valor_k_seleccionado is not None and st.session_state['valor_k_diam'] != valor_k_seleccionado:
+            st.session_state['valor_k_diam'] = valor_k_seleccionado
+        if valor_k_seleccionado is not None:
+            K_coef = st.number_input("Coeficiente de pérdidas K", min_value=0.1, value=float(st.session_state['valor_k_diam']), step=0.1, key="K_diam", disabled=True)
+        else:
+            K_coef = st.number_input("Coeficiente de pérdidas K", min_value=0.1, value=float(st.session_state['valor_k_diam']), step=0.1, key="K_diam", disabled=False)
+        st.session_state['valor_k_diam'] = K_coef
         # Cálculos puntuales
         D_calc_m = D_calc_puntual / 1000
         A = np.pi * (D_calc_m/2)**2
@@ -110,7 +152,7 @@ with tab_diam:
         g = 9.81
         hL = K * v**2 / (2*g)
         P2 = P1_calc - hL
-        Pv = get_vapor_pressure_mca(T_fluid)
+        Pv = presion_vapor
         theta = calc.calculate_cavitation_index(P1_calc, P2)
         # Mostrar resultados
         st.markdown("## Resultados")
@@ -142,28 +184,7 @@ with tab_diam:
         st.markdown("- 0.5 ≤ θ < 0.8: Riesgo alto de ruido por cavitación")
         st.markdown("- θ ≥ 0.8: Riesgo bajo o nulo de cavitación")
         
-        # Panel informativo sobre coeficiente K
-        with st.expander("Valores típicos del coeficiente K"):
-            st.markdown("""
-            **Coeficiente de pérdidas K - Valores típicos:**
-            
-            | Tipo de Válvula | K (típico) | Rango |
-            |:---------------:|:----------:|:-----:|
-            | Válvula de globo (totalmente abierta) | 6-10 | 5-15 |
-            | Válvula de globo (parcialmente abierta) | 15-30 | 10-50 |
-            | Válvula de compuerta (totalmente abierta) | 0.15-0.3 | 0.1-0.5 |
-            | Válvula de compuerta (parcialmente abierta) | 2-5 | 1-10 |
-            | Válvula de mariposa (totalmente abierta) | 0.3-0.5 | 0.2-1.0 |
-            | Válvula de mariposa (parcialmente abierta) | 5-15 | 3-25 |
-            | Válvula de bola (totalmente abierta) | 0.05-0.1 | 0.03-0.2 |
-            | Válvula de bola (parcialmente abierta) | 2-8 | 1-15 |
-            | Codo de 90° | 0.3-0.5 | 0.2-0.8 |
-            | Tee en línea | 0.2-0.4 | 0.1-0.6 |
-            | Entrada de depósito | 0.5-1.0 | 0.3-1.5 |
-            | Salida a depósito | 1.0 | 0.8-1.2 |
-            
-            **Nota:** Los valores pueden variar según el fabricante, tamaño y condiciones de operación.
-            """)
+        
     with col2:
         results = []
         for D in D_range:
@@ -531,6 +552,41 @@ with tab_diam:
             
             La presión de vapor es el **umbral crítico** que determina cuándo comienza la cavitación, por eso es fundamental en el análisis del índice de cavitación.
             """)
+        # Panel de valores típicos de K (singularidades)
+        with st.expander("🔢 Tabla de valores típicos de K (singularidades)"):
+            st.markdown("""
+            **Valores de K típicos para singularidades hidráulicas:**
+
+            | Singularidad                        | Tipo                        | K    |
+            |:------------------------------------|:----------------------------|:-----|
+            | Compuerta Válvula                   | Completamente Abierto       | 0.17 |
+            |                                    | 3/4 Abierto                 | 0.9  |
+            |                                    | 1/2 Abierto                 | 4.5  |
+            |                                    | 1/4 Abierto                 | 24   |
+            | Válvula de Globo                   | Completamente Abierto       | 6    |
+            |                                    | 1/2 Abierto                 | 9.5  |
+            | Globe Válvula, asiento completo    | Completamente Abierto       | 6    |
+            |                                    | 1/2 Abierto                 | 8.5  |
+            | Válvula Mariposa                   | Completamente Abierto       | 0.2  |
+            |                                    | θ= 5°                       | 0.24 |
+            |                                    | θ= 10°                      | 0.52 |
+            |                                    | θ= 20°                      | 1.54 |
+            |                                    | θ= 40°                      | 10.8 |
+            |                                    | θ= 60°                      | 118  |
+            | Disco de taponamiento              | Completamente Abierto       | 9    |
+            |                                    | 3/4 Abierto                 | 13   |
+            |                                    | 1/2 Abierto                 | 36   |
+            |                                    | 1/4 Abierto                 | 112  |
+            | Válvula de Ángulo                  | Completamente Abierto       | 2    |
+            | Válvula Check                      | Resorte                     | 2    |
+            |                                    | Disco                       | 10   |
+            |                                    | Bola                        | 70   |
+            | Válvula de pie                     |                            | 15   |
+            | Medidor de Caudal                  | Disco                       | 7    |
+            |                                    | Pistón                      | 15   |
+            |                                    | Rotacional                  | 10   |
+            |                                    | Turbina                     | 6    |
+            """)
     with col4:
         pass
 
@@ -542,14 +598,25 @@ with tab_caudal:
         st.subheader("Datos")
         D = st.number_input("Diámetro fijo (mm)", min_value=1.0, value=50.0, step=1.0, key="D_caudal")
         P1 = st.number_input("Presión de entrada P1 (mca)", min_value=0.0, value=10.0, step=0.1, key="P1_caudal")
-        K_coef = st.number_input("Coeficiente de pérdidas K", min_value=0.1, value=10.0, step=0.1, key="K_caudal")
+        # --- ComboBox de valores típicos de K ---
+        if 'valor_k_caudal' not in st.session_state:
+            st.session_state['valor_k_caudal'] = 10.0
+        seleccion_k = st.selectbox("Selecciona un valor típico de K o elige 'Personalizado':", opciones_k, key="combo_k_caudal")
+        valor_k_seleccionado = next((v[1] for v in valores_k if v[0] == seleccion_k), None)
+        if valor_k_seleccionado is not None and st.session_state['valor_k_caudal'] != valor_k_seleccionado:
+            st.session_state['valor_k_caudal'] = valor_k_seleccionado
+        if valor_k_seleccionado is not None:
+            K_coef = st.number_input("Coeficiente de pérdidas K", min_value=0.1, value=float(st.session_state['valor_k_caudal']), step=0.1, key="K_caudal", disabled=True)
+        else:
+            K_coef = st.number_input("Coeficiente de pérdidas K", min_value=0.1, value=float(st.session_state['valor_k_caudal']), step=0.1, key="K_caudal", disabled=False)
+        st.session_state['valor_k_caudal'] = K_coef
         Q_puntual = st.number_input("Caudal de cálculo (L/s)", min_value=0.01, value=5.0, step=0.1, key="Q_puntual")
         # Cálculo puntual
         area_puntual = np.pi * (D/1000/2)**2
         v_puntual = (Q_puntual/1000) / area_puntual if area_puntual > 0 else 0
         hL_puntual = K_coef * v_puntual**2 / (2*9.81)
         P2_puntual = P1 - hL_puntual
-        Pv_puntual = get_vapor_pressure_mca(T_fluid)
+        Pv_puntual = presion_vapor
         theta_puntual = calc.calculate_cavitation_index(P1, P2_puntual)
         st.markdown("## Resultados")
         st.metric(label="Índice de Cavitación (θ)", value=f"{theta_puntual:.3f}")
@@ -574,27 +641,7 @@ with tab_caudal:
         ordenada_max = st.number_input("Ordenada máxima", min_value=0.1, value=30.0, step=0.1, key="ordenada_max_caudal")
         Q_range = np.arange(Q_min, Q_max + Q_step, Q_step) / 1000  # m3/s
         # Panel informativo sobre coeficiente K
-        with st.expander("Valores típicos del coeficiente K"):
-            st.markdown("""
-            **Coeficiente de pérdidas K - Valores típicos:**
-            
-            | Tipo de Válvula | K (típico) | Rango |
-            |:---------------:|:----------:|:-----:|
-            | Válvula de globo (totalmente abierta) | 6-10 | 5-15 |
-            | Válvula de globo (parcialmente abierta) | 15-30 | 10-50 |
-            | Válvula de compuerta (totalmente abierta) | 0.15-0.3 | 0.1-0.5 |
-            | Válvula de compuerta (parcialmente abierta) | 2-5 | 1-10 |
-            | Válvula de mariposa (totalmente abierta) | 0.3-0.5 | 0.2-1.0 |
-            | Válvula de mariposa (parcialmente abierta) | 5-15 | 3-25 |
-            | Válvula de bola (totalmente abierta) | 0.05-0.1 | 0.03-0.2 |
-            | Válvula de bola (parcialmente abierta) | 2-8 | 1-15 |
-            | Codo de 90° | 0.3-0.5 | 0.2-0.8 |
-            | Tee en línea | 0.2-0.4 | 0.1-0.6 |
-            | Entrada de depósito | 0.5-1.0 | 0.3-1.5 |
-            | Salida a depósito | 1.0 | 0.8-1.2 |
-            
-            **Nota:** Los valores pueden variar según el fabricante, tamaño y condiciones de operación.
-            """)
+        
     with col2:
         results = []
         for Q in Q_range:
@@ -958,6 +1005,41 @@ with tab_caudal:
             4. **Altitud** (afecta la presión atmosférica)
             
             La presión de vapor es el **umbral crítico** que determina cuándo comienza la cavitación, por eso es fundamental en el análisis del índice de cavitación.
+            """)
+        # Panel de valores típicos de K (singularidades)
+        with st.expander("🔢 Tabla de valores típicos de K (singularidades)"):
+            st.markdown("""
+            **Valores de K típicos para singularidades hidráulicas:**
+
+            | Singularidad                        | Tipo                        | K    |
+            |:------------------------------------|:----------------------------|:-----|
+            | Compuerta Válvula                   | Completamente Abierto       | 0.17 |
+            |                                    | 3/4 Abierto                 | 0.9  |
+            |                                    | 1/2 Abierto                 | 4.5  |
+            |                                    | 1/4 Abierto                 | 24   |
+            | Válvula de Globo                   | Completamente Abierto       | 6    |
+            |                                    | 1/2 Abierto                 | 9.5  |
+            | Globe Válvula, asiento completo    | Completamente Abierto       | 6    |
+            |                                    | 1/2 Abierto                 | 8.5  |
+            | Válvula Mariposa                   | Completamente Abierto       | 0.2  |
+            |                                    | θ= 5°                       | 0.24 |
+            |                                    | θ= 10°                      | 0.52 |
+            |                                    | θ= 20°                      | 1.54 |
+            |                                    | θ= 40°                      | 10.8 |
+            |                                    | θ= 60°                      | 118  |
+            | Disco de taponamiento              | Completamente Abierto       | 9    |
+            |                                    | 3/4 Abierto                 | 13   |
+            |                                    | 1/2 Abierto                 | 36   |
+            |                                    | 1/4 Abierto                 | 112  |
+            | Válvula de Ángulo                  | Completamente Abierto       | 2    |
+            | Válvula Check                      | Resorte                     | 2    |
+            |                                    | Disco                       | 10   |
+            |                                    | Bola                        | 70   |
+            | Válvula de pie                     |                            | 15   |
+            | Medidor de Caudal                  | Disco                       | 7    |
+            |                                    | Pistón                      | 15   |
+            |                                    | Rotacional                  | 10   |
+            |                                    | Turbina                     | 6    |
             """)
     with col4:
         pass 
