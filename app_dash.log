@@ -1,0 +1,74 @@
+2025-07-06 19:36:53 [INFO] Dash is running on http://127.0.0.1:8050/
+
+2025-07-06 19:40:22 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:40:22 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:40:22 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:41:26 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:41:26 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:41:26 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:41:41 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:41:41 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:41:41 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:42:07 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:42:07 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:42:07 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:42:07 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:42:07 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:42:07 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:42:44 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:42:44 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:42:44 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:42:44 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:42:44 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:42:44 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:43:33 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:43:33 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:43:33 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:43:35 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:43:35 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:43:35 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:43:37 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:43:37 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:43:37 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:44:02 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:44:02 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:44:02 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:45:16 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:45:16 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:45:16 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:45:56 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:45:56 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:45:56 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:46:02 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:46:02 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:46:02 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:46:07 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:46:07 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=79, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:46:07 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:46:08 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:46:08 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:46:08 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:46:09 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:46:09 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=77, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:46:09 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:46:10 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:46:10 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:46:10 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:47:20 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:47:20 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:47:20 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:48:02 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:48:02 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:48:02 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:48:46 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:48:46 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:48:46 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:49:02 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:49:02 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:49:02 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:52:56 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:52:56 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:52:56 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95
+2025-07-06 19:53:02 [INFO] --- DEBUG: Entradas del callback update_dashboard ---
+2025-07-06 19:53:02 [INFO] Q_lps=11, h_static=190, rpm=3500, length=2000, diam_mm=150, n_parallel=3, hw_c=130, eff_peak=78, elec_cost=0.12, tank_init=80, tank_min=30, days=1, hourly_str=0.6,0.6,0.6,0.6,0.7,0.85,1.1,1.4,1.7,2.1,1.95,1.8,1.7,1.6,1.5,1.55,1.7,1.9,2.0,1.6,1.2,1.0,0.8,0.7, show_analysis=False
+2025-07-06 19:53:02 [ERROR] [ERROR] Eficiencia pico debe estar entre 0.5 y 0.95

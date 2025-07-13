@@ -1,0 +1,23 @@
+streamlit run indice_cavitacion.py
+
+
+Excelente, ya tienes la app funcionando!
+El problema que ves con las tildes y caracteres extraños (como Ã¡, Ã³, etc.) es un problema de codificación, normalmente porque el archivo está guardado en una codificación diferente a UTF-8.
+Solución: Guardar el archivo como UTF-8
+1. Abre el archivo indice_cavitacion.py en tu editor de texto
+(Visual Studio Code, Notepad++, Sublime Text, etc.)
+2. Guarda el archivo con codificación UTF-8:
+En VS Code:
+Haz clic en la barra inferior donde dice la codificación (probablemente diga "Windows 1252" o "ANSI").
+Selecciona "Guardar con codificación" → "UTF-8".
+En Notepad++:
+Menú "Codificación" → "Codificar en UTF-8" (sin BOM).
+Guarda el archivo.
+3. Vuelve a ejecutar tu app con Streamlit:
+Apply to indice_cavit...
+Run
+¿Por qué ocurre esto?
+Si el archivo está en ANSI o Windows-1252, Python y Streamlit pueden interpretar mal los caracteres especiales.
+UTF-8 es el estándar para aplicaciones web y Python modernas.
+Haz esto y verás que los acentos y caracteres especiales se mostrarán correctamente.
+¿Quieres que te ayude a buscar y reemplazar manualmente los caracteres dañados si el problema persiste? ¿O prefieres que te explique cómo forzar la codificación desde el propio script?
