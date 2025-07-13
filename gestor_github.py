@@ -33,14 +33,20 @@ def subir_archivo():
 def subir_todos():
     version = entry_version2.get()
     msg = entry_msg2.get()
-    cmds = [
-        'git add .',
-        f'git commit -m "{msg} - Versión {version}"',
-        'git push'
-    ]
     resp = ''
-    for cmd in cmds:
-        resp += run_git_command(cmd)
+    # 1. git add .
+    resp_add = run_git_command('git add .')
+    resp += resp_add
+    # 2. git commit
+    resp_commit = run_git_command(f'git commit -m "{msg} - Versión {version}"')
+    resp += resp_commit
+    # Si no hay nada para commitear, mostrar mensaje claro y no hacer push
+    if "nothing to commit" in resp_commit or "no changes added to commit" in resp_commit or "nothing added to commit" in resp_commit:
+        messagebox.showinfo("Resultado", "No hay cambios nuevos para subir.\n\n" + resp_commit)
+        return
+    # 3. git push
+    resp_push = run_git_command('git push')
+    resp += resp_push
     messagebox.showinfo("Resultado", resp)
 
 def ver_estado():
