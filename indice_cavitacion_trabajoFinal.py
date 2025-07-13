@@ -9,10 +9,8 @@ tabla_dens = [999.9, 1000.0, 999.7, 999.1, 998.2, 997.0, 995.7, 994.1, 992.2, 99
 tabla_pv = [0.06, 0.09, 0.12, 0.17, 0.25, 0.33, 0.44, 0.58, 0.76, 0.98, 1.25, 1.61, 2.03, 2.56, 3.20, 3.96, 4.85, 5.93, 7.18, 8.62, 10.33]
 
 def interpola_tabla(temp, tabla_x, tabla_y):
-    if temp <= tabla_x[0]:
-        return tabla_y[0]
-    if temp >= tabla_x[-1]:
-        return tabla_y[-1]
+    if temp <= tabla_x[0]: return tabla_y[0]
+    if temp >= tabla_x[-1]: return tabla_y[-1]
     for i in range(1, len(tabla_x)):
         if temp < tabla_x[i]:
             x0, x1 = tabla_x[i-1], tabla_x[i]
@@ -20,15 +18,11 @@ def interpola_tabla(temp, tabla_x, tabla_y):
             return y0 + (y1 - y0) * (temp - x0) / (x1 - x0)
     return tabla_y[-1]
 
-# --- Funciones Auxiliares ---
 def get_vapor_pressure_mca(temperature_celsius):
-    A = 8.07131
-    B = 1730.63
-    C = 233.426
+    A, B, C = 8.07131, 1730.63, 233.426
     T = temperature_celsius
     P_mmHg = 10 ** (A - (B / (C + T)))
-    P_mca = P_mmHg * 0.0136
-    return P_mca
+    return P_mmHg * 0.0136
 
 class CavitationCalculator:
     def __init__(self, fluid_temperature_celsius):
@@ -36,24 +30,17 @@ class CavitationCalculator:
         self.Pv = get_vapor_pressure_mca(fluid_temperature_celsius)
 
     def calculate_cavitation_index(self, P_upstream_mca, P_downstream_mca):
-        if P_upstream_mca <= P_downstream_mca:
-            return None
+        if P_upstream_mca <= P_downstream_mca: return None
         delta_P = P_upstream_mca - P_downstream_mca
-        if delta_P == 0:
-            return float('inf')
+        if delta_P == 0: return float('inf')
         numerator = P_downstream_mca - self.Pv
-        theta = numerator / delta_P
-        return theta
+        return numerator / delta_P
 
     def get_cavitation_risk_description(self, theta):
-        if theta is None:
-            return "No calculado"
-        elif theta < 0.5:
-            return "🚨 ¡Riesgo CRÍTICO de daño por cavitación! 🚨"
-        elif theta < 0.8:
-            return "⚠️ Riesgo ALTO de ruido por cavitación. ⚠️"
-        else:
-            return "✅ Riesgo de cavitación BAJO o NULO."
+        if theta is None: return "No calculado"
+        elif theta < 0.5: return "🚨 ¡Riesgo CRÍTICO de daño por cavitación! 🚨"
+        elif theta < 0.8: return "⚠️ Riesgo ALTO de ruido por cavitación. ⚠️"
+        else: return "✅ Riesgo de cavitación BAJO o NULO."
 
 st.set_page_config(layout="wide", page_title="Simulación de Índice de Cavitación - Trabajo Final")
 st.title("Simulación de Índice de Cavitación: Trabajo Final")
@@ -62,7 +49,40 @@ st.title("Simulación de Índice de Cavitación: Trabajo Final")
 st.sidebar.header("Parámetros Generales")
 T_fluid = st.sidebar.number_input("Temperatura del fluido (°C)", min_value=0, max_value=100, value=20, step=1)
 densidad_agua = interpola_tabla(T_fluid, tabla_temp, tabla_dens)
+presion_vapor = interpola_tabla(T_fluid, tabla_temp, tabla_pv)
 st.sidebar.info(f"Densidad del agua a {T_fluid}°C: **{densidad_agua:.1f} kg/m³**")
+st.sidebar.info(f"Presión de vapor a {T_fluid}°C: **{presion_vapor:.3f} mca**")
+
+# Panel desplegable con tabla de temperatura vs presión de vapor
+with st.sidebar.expander("📊 Tabla de Temperatura vs Presión de Vapor"):
+    tabla_df = pd.DataFrame({
+        'Temperatura (°C)': tabla_temp,
+        'Presión de Vapor (mca)': tabla_pv
+    })
+    st.markdown("**Tabla de Presión de Vapor del Agua:**")
+    st.dataframe(tabla_df, use_container_width=True)
+    st.markdown("""
+    **Notas:**
+    - Los valores están en metros de columna de agua (mca)
+    - La presión de vapor aumenta exponencialmente con la temperatura
+    - A 100°C, la presión de vapor es 10.33 mca (presión atmosférica)
+    """)
+
+# Panel desplegable con tabla de temperatura vs densidad
+with st.sidebar.expander("💧 Tabla de Temperatura vs Densidad"):
+    densidad_df = pd.DataFrame({
+        'Temperatura (°C)': tabla_temp,
+        'Densidad (kg/m³)': tabla_dens
+    })
+    st.markdown("**Tabla de Densidad del Agua:**")
+    st.dataframe(densidad_df, use_container_width=True)
+    st.markdown("""
+    **Notas:**
+    - Los valores están en kilogramos por metro cúbico (kg/m³)
+    - La densidad máxima del agua es a 4°C (1000 kg/m³)
+    - La densidad disminuye ligeramente con el aumento de temperatura
+    - A 100°C, la densidad es 958.4 kg/m³
+    """)
 
 calc = CavitationCalculator(T_fluid)
 
@@ -163,10 +183,6 @@ with tab_diam:
         df = pd.DataFrame(results)
         st.subheader("Gráfico θ vs Diámetro")
         
-        # Selector de escala del eje Y
-        escala_y = st.radio("Escala del eje Y", [f"Detalle (0-1)", f"Completa (0-{ordenada_max})"], key="escala_diam")
-        y_max = ordenada_max if escala_y == f"Completa (0-{ordenada_max})" else 1
-        
         # Crear máscaras para los rangos de riesgo
         theta_array = np.array(df["Índice θ"])
         mask_rojo = theta_array < 0.5
@@ -240,13 +256,25 @@ with tab_diam:
         fig.add_hline(y=0.8, line_dash="dash", line_color="orange", line_width=2, 
                      annotation_text="Límite Ruido (0.8)", secondary_y=False)
         
+        # Calcular los límites dinámicos:
+        x_puntual = D_calc_puntual
+        x_min = max(df["Diámetro (mm)"].min(), x_puntual - 10)
+        x_max = min(df["Diámetro (mm)"].max(), x_puntual + 10)
+        y_puntual = theta_puntual
+        if y_puntual is not None and np.isfinite(y_puntual):
+            y_min = max(min(df["Índice θ"].min(), y_puntual - 3), -5)
+            y_max = max(y_puntual + 1, y_min + 0.5)
+        else:
+            y_min = df["Índice θ"].min()
+            y_max = df["Índice θ"].max()
         fig.update_layout(
             xaxis_title="Diámetro de válvula (mm)",
             yaxis_title="Índice de Cavitación θ",
             height=400,
             showlegend=False,
             hovermode="x",
-            yaxis_range=[0,y_max]
+            xaxis_range=[x_min, x_max],
+            yaxis_range=[y_min, y_max]
         )
         fig.update_xaxes(
             showspikes=True,
@@ -586,10 +614,6 @@ with tab_caudal:
         df = pd.DataFrame(results)
         st.subheader("Gráfico θ vs Caudal")
         
-        # Selector de escala del eje Y
-        escala_y = st.radio("Escala del eje Y", [f"Detalle (0-1)", f"Completa (0-{ordenada_max})"], key="escala_caudal")
-        y_max = ordenada_max if escala_y == f"Completa (0-{ordenada_max})" else 1
-        
         # Crear máscaras para los rangos de riesgo
         theta_array = np.array(df["Índice θ"])
         mask_rojo = theta_array < 0.5
@@ -657,13 +681,28 @@ with tab_caudal:
         fig.add_hline(y=0.8, line_dash="dash", line_color="orange", line_width=2, 
                      annotation_text="Límite Ruido (0.8)", secondary_y=False)
         
+        # Calcular los límites dinámicos:
+        x_puntual = Q_puntual
+        x_min = max(df["Caudal (L/s)"].min(), x_puntual - 10)
+        x_max = min(df["Caudal (L/s)"].max(), x_puntual + 10)
+        # Asegurar que x_min < x_max
+        if x_min > x_max:
+            x_min, x_max = x_max, x_min
+        y_puntual = theta_puntual
+        if y_puntual is not None and np.isfinite(y_puntual):
+            y_min = max(min(df["Índice θ"].min(), y_puntual - 3), -5)
+            y_max = max(y_puntual + 1, y_min + 0.5)
+        else:
+            y_min = df["Índice θ"].min()
+            y_max = df["Índice θ"].max()
         fig.update_layout(
             xaxis_title="Caudal (L/s)",
             yaxis_title="Índice de Cavitación θ",
             height=400,
             showlegend=False,
             hovermode="x",
-            yaxis_range=[0,y_max]
+            xaxis_range=[x_min, x_max],
+            yaxis_range=[y_min, y_max]
         )
         fig.update_xaxes(
             showspikes=True,
